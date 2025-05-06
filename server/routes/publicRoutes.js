@@ -4,7 +4,7 @@ const StudyMaterial = require("../models/StudyMaterial");
 const MockTest = require("../models/MockTest");
 const Progress = require("../models/Progress");
 
-// GET all study materials
+
 router.get("/study-materials", async (req, res) => {
   try {
     const materials = await StudyMaterial.find();
@@ -14,7 +14,7 @@ router.get("/study-materials", async (req, res) => {
   }
 });
 
-// GET all mock tests
+
 router.get("/mock-tests", async (req, res) => {
   try {
     const tests = await MockTest.find();
@@ -24,7 +24,7 @@ router.get("/mock-tests", async (req, res) => {
   }
 });
 
-// GET user progress by ID
+
 router.get("/progress/:userId", async (req, res) => {
   try {
     const progress = await Progress.findOne({ userId: req.params.userId });
