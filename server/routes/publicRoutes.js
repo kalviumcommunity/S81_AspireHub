@@ -3,7 +3,7 @@ const router = express.Router();
 const StudyMaterial = require("../models/StudyMaterial");
 const MockTest = require("../models/MockTest");
 const Progress = require("../models/Progress");
-
+const authenticate = require('../middleware/authMiddleware');
 
 router.get("/study-materials", async (req, res) => {
   try {
@@ -44,7 +44,9 @@ router.post("/study-materials", async (req, res) => {
     }
   });
 
-
+  router.get('/dashboard', authenticate, (req, res) => {
+    res.json({ message: `Welcome user ${req.user.userId}` });
+  });
 
 
 module.exports = router;
