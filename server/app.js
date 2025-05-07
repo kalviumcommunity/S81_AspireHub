@@ -5,10 +5,12 @@ const dotenv = require("dotenv");
 const authRoutes = require('./routes/auth');
 const publicRoutes = require("./routes/publicRoutes");
 const userRoutes = require('./routes/userRoutes');
+
 dotenv.config();
 
 const app = express();
 app.use(cors());
+[]
 app.use(express.json());
 
 mongoose.connect(process.env.MONGO_URI)
@@ -17,6 +19,7 @@ mongoose.connect(process.env.MONGO_URI)
 
 app.use("/api", publicRoutes);
 app.use("/api/auth", authRoutes);
+app.use('/api/users', userRoutes);
 app.use('/api/users', userRoutes);
 
 
