@@ -1,0 +1,27 @@
+meta {
+  name: test
+  type: http
+  seq: 2
+}
+
+post {
+  url: http://localhost:5000/api/users/add
+  body: json
+  auth: none
+}
+
+body:json {
+  {
+    "username": "brvecsd1",
+    "password": "secyridnvob"
+  }
+  
+}
+
+tests {
+  {
+    "username": "john_doe",
+    "password": "securePass123"
+  }
+  
+}

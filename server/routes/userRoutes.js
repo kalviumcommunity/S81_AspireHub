@@ -3,18 +3,37 @@ const router = express.Router();
 const User = require('../models/User');
 
 
+
 router.get('/', async (req, res) => {
-  const users = await User.find();
-  res.json(users);
+  try{
+
+    const users = await User.find();
+    res.json(users);
+  }
+  catch(err)
+  {
+    console.log(err);
+  }
 });
 
 
-router.post('/', async (req, res) => {
+router.post('/add', async (req, res) => {
   const { username, password } = req.body;
-  const newUser = new User({ username, password });
-  await newUser.save();
-  res.status(201).json(newUser);
+
+  try {
+    const existingUser = await User.findOne({ username });
+    if (existingUser) {
+      return res.status(409).json({ error: 'Username already exists' });
+    }
+
+    const newUser = new User({ username, password });
+    await newUser.save();
+    res.status(201).json(newUser);
+  } catch (err) {
+    res.status(500).json({ error: 'Server error', message: err.message });
+  }
 });
+
 
 router.put('/:id', async (req, res) => {
   try {
